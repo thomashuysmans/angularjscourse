@@ -1,0 +1,27 @@
+<h1>Invitation</h1>
+<p>Get the party started! Invite all your friends using the form below.</p>
+
+<form ng-submit="invite.sendInvitations()">
+
+    <dl>
+        <dt>Event:</dt>
+        <dd>
+            <input type="text" ng-model="invite.event.title" class="form-control" />
+        </dd>
+        <dt>Date:</dt>
+        <dd><input type="datetime" ng-model="invite.event.datetime" class="form-control" /></dd>
+        <dt>Contacts to invite:</dt>
+        <dd>
+            <ul>
+                <li ng-repeat="contact in invite.contacts">
+                    <label>
+                        <input type="checkbox" ng-model="contact.invited" />
+                        {{ contact | contactName }}
+                    </label>
+                </li>    
+            </ul>
+        </dd>
+        <dt></dt>
+        <dd><button class="btn btn-primary">Send invitations</button></dd>
+    </dl>
+</form>

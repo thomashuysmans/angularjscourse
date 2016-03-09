@@ -1,0 +1,35 @@
+<form ng-submit="main.saveContact()" ng-submit="main.saveContact()" name="main.newContactForm" novalidate>
+    <label for="inputFirstName">First name:</label>
+    <input type="text" ng-model="main.newContact.firstName" ng-required="true" id="intputFirstName" class="form-control">
+    <label for="inputSurname">Surname:</label>
+    <input type="text" ng-model="main.newContact.surname" id="inputSurname" ng-required="true" class="form-control">
+    <label for="inputEmail">E-mail address:</label>
+    <input type="text" ng-model="main.newContact.email" id="inputEmail" ng-required="true" class="form-control">
+    <button type="submit" class="btn btn-primary" ng-disabled="main.newContactForm.$invalid" >Add</button>    
+</form>
+
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>E-mail address</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="contact in main.contacts">
+		<td>
+			<span ng-hide="contact.inEditMode">{{contact | contactName}}</span>
+			<div ng-show="contact.inEditMode">
+				<input type="text" ng-model="contact.firstName" class="form-control" />
+				<input type="text" ng-model="contact.surname" class="form-control" />
+			</div>
+		</td>
+		<td>
+			<span ng-hide="contact.inEditMode">{{contact.email}}</span>
+			<input type="email" ng-model="contact.email" class="form-control" ng-show="contact.inEditMode" />
+		</td>
+		<td class="form-actions">
+			<button class="btn" ng-hide="contact.inEditMode" ng-click="contact.inEditMode = true">Edit</button>
+			<button class="btn btn-danger" ng-hide="contact.inEditMode" ng-click="main.deleteContact(contact)">Delete</button>
+			<button class="btn btn-primary" ng-show="contact.inEditMode" ng-click="main.updateContact(contact)">Save</button>
+		</td>
+	</tr>
+</table>
